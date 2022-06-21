@@ -1,43 +1,36 @@
 const fs = require("fs");
 const path = require("path");
-const studentsPath = path.join(__dirname + "/../data/students.json");
+const studentsPath = path.join(__dirname + "/../data/users.json");
+const cookieParser = require("cookie-parser");
+
+
+
 
 function readStudents() {
-  const students = JSON.parse(fs.readFileSync(studentsPath));
-  console.log(students);
+  const students = JSON.parse(fs.readFileSync(studentsPath , "utf8"));
+  // console.log(students);
   return students;
 }
-function storeStudent(username, password) {
+function storeStudent(data) {
   const students = readStudents();
-  students.push({ username, password });
-  fs.writeFileSync("../data/students.json", JSON.stringify(students));
+  students.push(data);
+  // console.log(students);
+  fs.writeFileSync(studentsPath , JSON.stringify(students));
 }
 
 
 function Login(username, password) {
   const students = readStudents();
-  console.log(students);
-  for (let i = 0; i < students.length; i++) {
-    if (students[i].username.username === username && students[i].username.password === password) {
-      console.log("you are logged in");
-      return true;
-    }else{
-      console.log("you are not logged in");
-      return false;
-    }
-}
-}
 
-
-
-
+  // console.log(students);
   
-  
- 
+  if (students.find((student) => student.username === username && student.password === password)) {
 
-
-
-
+    return true;
+    
+  }
+  return false;
+}
 
 
 
@@ -53,4 +46,8 @@ function getStudent(id) {
   return {};
 }
 
-module.exports = { readStudents, getStudent, storeStudent, Login };
+
+ 
+
+
+module.exports = { readStudents, getStudent, storeStudent, Login,  };

@@ -23,6 +23,13 @@ loginForm.addEventListener("submit", (e) => {
             console.log("res", res);
             const messageEl = document.getElementById("msg");
             messageEl.innerHTML = res.msg;
+            if (res.msg === "Admin"){
+                
+                window.location ="/students"
+            }
+  
+
+
         }
         );
 
